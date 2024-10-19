@@ -21,11 +21,13 @@ func S(num int) int {
 }
 
 func N(num float64) int {
-	for i := 0; i < 150000; i++ {
+	// idk how to do this one
+	for i := 1; i < 999999999999999999; i++ {
 		s := S(i)
 		product := int(num) * i
 
 		if s == product {
+			fmt.Println(i)
 			return i
 		}
 	}
@@ -49,6 +51,7 @@ func AreCoprime(u int, v int) bool {
 }
 
 func min(a, b int) int {
+	// Helper to get min from two integers
 	if a < b {
 		return a
 	}

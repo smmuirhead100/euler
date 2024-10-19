@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"shifted_multiples"
+	"multiples_of_3_or_5"
 )
 
 func main() {
-	res := shifted_multiples.T(3)
+	res := multiples_of_3_or_5.MultiplesOfThreeOrFive(1000)
 	fmt.Println(res)
 }

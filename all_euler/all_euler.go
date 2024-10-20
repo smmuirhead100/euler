@@ -53,26 +53,24 @@ func PrimeDigitReplacements() int {
 	return 0
 }
 
-func LatticePaths(w, h int) int {
-	// 2D slice
-	paths := make([][]int, w+1)
-	for i := range paths {
-		paths[i] = make([]int, h+1)
+func LatticePaths(w, h int, memo map[string]int) int {
+	// Find number of paths you can take from top left
+	// of grid to bottom right
+	if w == 0 || h == 0 {
+		return 1
 	}
 
-	// Edges
-	for i := 0; i <= w; i++ {
-		paths[i][0] = 1
-	}
-	for j := 0; j <= h; j++ {
-		paths[0][j] = 1
+	// Memo
+	key := strconv.Itoa(w) + "," + strconv.Itoa(h)
+	if val, exists := memo[key]; exists {
+		return val
 	}
 
-	// Fill the grid
-	for i := 1; i <= w; i++ {
-		for j := 1; j <= h; j++ {
-			paths[i][j] = paths[i-1][j] + paths[i][j-1]
-		}
-	}
-	return paths[w][h]
+	pathsIfGoRight := LatticePaths(w-1, h, memo)
+	pathsIfGoDown := LatticePaths(w, h-1, memo)
+
+	result := pathsIfGoRight + pathsIfGoDown
+	memo[key] = result
+
+	return result
 }

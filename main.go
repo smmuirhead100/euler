@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.LatticePaths(20, 20, map[string]int{})
+	res := all_euler.HighlyDivisibleTriangularNumber(500)
 	fmt.Println(res)
 }

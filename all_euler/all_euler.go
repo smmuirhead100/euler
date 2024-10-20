@@ -74,3 +74,47 @@ func LatticePaths(w, h int, memo map[string]int) int {
 
 	return result
 }
+
+func SumSquareDifference(num int) int {
+	sumSqSum := 0
+	sum := 0
+	for i := 0; i <= num; i++ {
+		sumSqSum += i * i
+		sum += i
+	}
+	sumSq := sum * sum
+
+	return sumSq - sumSqSum
+}
+
+func GetDivisors(num int) []int {
+	// Return list of all valid divisors for given int
+	nums := []int{}
+
+	for i := 1; i <= num; i++ {
+		if num%i == 0 {
+			nums = append(nums, i)
+		}
+	}
+	return nums
+}
+
+func getTriangleNumber(num int) int {
+	sum := 0
+	for i := 1; i <= num; i++ {
+		sum += i
+	}
+	return sum
+}
+
+func HighlyDivisibleTriangularNumber(num int) int {
+	b := 1
+	for {
+		sum := getTriangleNumber(b)
+		divisors := GetDivisors(sum)
+		if len(divisors) > num {
+			return sum
+		}
+		b++
+	}
+}

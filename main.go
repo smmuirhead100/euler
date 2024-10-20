@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.PythagoreanTriplet(1000)
+	res := all_euler.LatticePaths(20, 20)
 	fmt.Println(res)
 }

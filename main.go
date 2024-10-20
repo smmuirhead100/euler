@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.HighlyDivisibleTriangularNumber(500)
+	res := all_euler.PanDigitalMultiples(999999999)
 	fmt.Println(res)
 }

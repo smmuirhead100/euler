@@ -118,3 +118,25 @@ func HighlyDivisibleTriangularNumber(num int) int {
 		b++
 	}
 }
+
+func PanDigitalMultiples(target int) int {
+	// 38
+	closestToTarget := 0
+	for i := 0; i < target; i++ {
+		currentSum := 0
+		for n := 0; n < 10; n++ {
+			product := i * n
+			currentSum += product
+
+			currentDifference := target - closestToTarget
+			contendingDifference := target - currentSum
+
+			if contendingDifference < 0 {
+				break
+			} else if currentDifference > contendingDifference {
+				closestToTarget = currentSum
+			}
+		}
+	}
+	return closestToTarget
+}

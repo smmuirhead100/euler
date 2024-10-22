@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.CountingSundaysSince(1901, 2001)
+	res := all_euler.CountingSundaysOnFirstSince("January", 1901, "December", 2000)
 	fmt.Println(res)
 }

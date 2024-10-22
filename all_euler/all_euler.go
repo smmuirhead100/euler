@@ -160,6 +160,11 @@ var MONTHS_TO_DAYS = map[string]int{
 	"December":  31,
 }
 
+var MONTHS_ORDER = []string{
+	"January", "February", "March", "April", "May", "June",
+	"July", "August", "September", "October", "November", "December",
+}
+
 func IsLeapYear(year int) bool {
 	if year%4 == 0 && year%100 != 0 {
 		return true
@@ -171,38 +176,50 @@ func IsLeapYear(year int) bool {
 
 func CountingSundaysOnFirstSince(startMonth string, startYear int, endMonth string, endYear int) int {
 	offset := 1
-	month := "January"
+	monthIndex := 0
 	year := 1900
 
 	// Determine offset to start at
 	for {
+		month := MONTHS_ORDER[monthIndex]
 		if startYear == year && startMonth == month {
 			break
 		}
 
 		leftover := MONTHS_TO_DAYS[month] % 7
 		offset += leftover
+		offset = offset % 7
 
-		// TODO: Maybe we can just do this at the very end? Not sure.
-		if leftover >= 7 {
-			offset = offset % 7
-		}
-
-		if month == "December" {
+		monthIndex++
+		if monthIndex == 12 {
 			year++
-			month = "January"
+			monthIndex = 0
 		}
-		// TODO: How would I go to the next month?
+
 	}
 
 	sundaysOnFirstOfMonth := 0
+	if offset == 0 {
+		sundaysOnFirstOfMonth++
+	}
 	for {
+		month := MONTHS_ORDER[monthIndex]
+		days := MONTHS_TO_DAYS[month]
+
 		if endYear == year && startMonth == month { // TODO: This is not accurate.
 			break
 		}
 
-		leftover := MONTHS_TO_DAYS[month] % 7
+		// Account for leap years
+		if month == "February" {
+			if IsLeapYear(year) {
+				days = 29
+			}
+		}
+
+		leftover := days % 7
 		offset += leftover
+		offset = offset % 7
 
 		// This is key - means that we landed on a Sunday!
 		if offset == 0 {
@@ -211,9 +228,10 @@ func CountingSundaysOnFirstSince(startMonth string, startYear int, endMonth stri
 
 		if month == "December" {
 			year++
-			month = "January"
+			monthIndex = 0
+		} else {
+			monthIndex++
 		}
-		// TODO: How would I go to the next month?
 	}
 
 	return sundaysOnFirstOfMonth

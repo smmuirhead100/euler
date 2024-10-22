@@ -121,6 +121,7 @@ func HighlyDivisibleTriangularNumber(num int) int {
 
 func PanDigitalMultiples(target int) int {
 	// 38
+	// Pandigital: Each digit can only exist once in the number
 	closestToTarget := 0
 	for i := 0; i < target; i++ {
 		currentSum := 0
@@ -139,4 +140,81 @@ func PanDigitalMultiples(target int) int {
 		}
 	}
 	return closestToTarget
+}
+
+// ----------------
+// Counting Sundays
+
+var MONTHS_TO_DAYS = map[string]int{
+	"January":   31,
+	"February":  28,
+	"March":     31,
+	"April":     30,
+	"May":       31,
+	"June":      30,
+	"July":      31,
+	"August":    31,
+	"September": 30,
+	"October":   31,
+	"November":  30,
+	"December":  31,
+}
+
+func IsLeapYear(year int) bool {
+	if year%4 == 0 && year%100 != 0 {
+		return true
+	} else if year%400 == 0 {
+		return true
+	}
+	return false
+}
+
+func CountingSundaysOnFirstSince(startMonth string, startYear int, endMonth string, endYear int) int {
+	offset := 1
+	month := "January"
+	year := 1900
+
+	// Determine offset to start at
+	for {
+		if startYear == year && startMonth == month {
+			break
+		}
+
+		leftover := MONTHS_TO_DAYS[month] % 7
+		offset += leftover
+
+		// TODO: Maybe we can just do this at the very end? Not sure.
+		if leftover >= 7 {
+			offset = offset % 7
+		}
+
+		if month == "December" {
+			year++
+			month = "January"
+		}
+		// TODO: How would I go to the next month?
+	}
+
+	sundaysOnFirstOfMonth := 0
+	for {
+		if endYear == year && startMonth == month { // TODO: This is not accurate.
+			break
+		}
+
+		leftover := MONTHS_TO_DAYS[month] % 7
+		offset += leftover
+
+		// This is key - means that we landed on a Sunday!
+		if offset == 0 {
+			sundaysOnFirstOfMonth += 1
+		}
+
+		if month == "December" {
+			year++
+			month = "January"
+		}
+		// TODO: How would I go to the next month?
+	}
+
+	return sundaysOnFirstOfMonth
 }

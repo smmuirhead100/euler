@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.PanDigitalMultiples(999999999)
+	res := all_euler.CountingSundaysSince(1901, 2001)
 	fmt.Println(res)
 }

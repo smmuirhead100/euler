@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.CountingSundaysOnFirstSince("January", 1901, "December", 2000)
+	res := all_euler.DistinctPowers(2, 100)
 	fmt.Println(res)
 }

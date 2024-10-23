@@ -1,6 +1,7 @@
 package all_euler
 
 import (
+	"math/big"
 	"strconv"
 )
 
@@ -235,4 +236,20 @@ func CountingSundaysOnFirstSince(startMonth string, startYear int, endMonth stri
 	}
 
 	return sundaysOnFirstOfMonth
+}
+
+func DistinctPowers(min, max int) int {
+	distinctPowers := make(map[string]bool)
+	for a := min; a <= max; a++ {
+		for b := min; b <= max; b++ {
+			base := big.NewInt(int64(a))
+			exp := big.NewInt(int64(b))
+			result := new(big.Int).Exp(base, exp, nil)
+
+			// Convert to string to use as map key
+			resultStr := result.String()
+			distinctPowers[resultStr] = true
+		}
+	}
+	return len(distinctPowers)
 }

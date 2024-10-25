@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.DistinctPowers(2, 100)
+	res := all_euler.PowerfulDigitSum()
 	fmt.Println(res)
 }

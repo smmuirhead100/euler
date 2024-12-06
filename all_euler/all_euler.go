@@ -256,20 +256,6 @@ func DistinctPowers(min, max int) int {
 
 // ----------------
 // Powerful Digit Sum (56)
-
-func getDigitalSum(a, b int) string {
-	aStr := strconv.
-}
 func PowerfulDigitSum(base, exp int) int {
-	maxSum := 0
-
-	for a := 1; a <= base; a++ {
-		aStr := strconv.Itoa(a)
-
-		// Add product of each 
-		for _, char := range aStr {
-			
-		}
-		
-	}
+	panic("Not Implemented")
 }

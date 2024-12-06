@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	res := all_euler.PowerfulDigitSum()
+	res := all_euler.PowerfulDigitSum(3, 10)
 	fmt.Println(res)
 }
